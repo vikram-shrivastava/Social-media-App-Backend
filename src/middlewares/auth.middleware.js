@@ -11,7 +11,7 @@ export const verifyJWT=asynchandler(async(req,_,next)=>{
             throw new handleerror(401,"UnAuthorized Error can not access");
         }
         const decodedtoken=jwt.verify(token,process.env.ACCESS_TOKEN_SECRET)
-    
+        
         const user=await User.findById(decodedtoken?._id).select("-password -RefreshToken")
         if(!user)
         {
